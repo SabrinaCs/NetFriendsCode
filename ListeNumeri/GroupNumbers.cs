@@ -14,9 +14,9 @@ namespace ListeNumeri
         Dictionary<string, List<int>> Unfounded = new Dictionary<string, List<int>>();
         List<int> currentGroup;
 
-        public GroupNumbers()
+        public GroupNumbers(List<int> numbers)
         {
-            sourceNumbers = new List<int> { 1, 2, 3, 4, 12, 13, 14, 15, 21, 22, 23, 24, 25 };
+            sourceNumbers = numbers; //new List<int> { 1, 2, 3, 4, 12, 13, 14, 15, 21, 22, 23, 24, 25 };
             
             bool foundActive = false;
             bool notFoundActive = false;
@@ -96,7 +96,7 @@ namespace ListeNumeri
             Console.WriteLine();
 
             Console.WriteLine("Press Enter to end the program");
-            Console.ReadLine();
+            //Console.ReadLine();
         }
     }
 }

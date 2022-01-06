@@ -65,6 +65,15 @@ namespace ListeNumeri
                     });
                 }
 
+                if (theNumbers.Count == k) //la condizione dell'ultimo numero
+                {
+                    InList.Add(new()
+                    {
+                        Start = number,
+                        Jump = 1
+                    });
+                }
+
                 start = number;     //memorizzo la partenza dei continui
                 j = 1;
                 i = number;         //allineo l'indice col numero
