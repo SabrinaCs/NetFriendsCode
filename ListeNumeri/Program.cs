@@ -5,10 +5,21 @@ using ListeNumeri;
 
 Console.WriteLine("Press M for Check group of numbers Micky Version");
 Console.WriteLine("Press S for Check group of numbers Sabrina Version");
+Console.WriteLine("Press X for Check group of numbers Micle Version");
+
 ConsoleKeyInfo key = Console.ReadKey();
+
+List<int> allPages = new List<int>() { 6, 7, 8, 9, 10, 11, 12, 22, 23, 24, 25, 43, 44, 45, 46, 47, 48, 66, 67, 68, 84 };
+
 
 switch (key.KeyChar)
 {
+	case 'x':
+	case 'X':
+		GapCounter counter = new GapCounter(allPages);
+		Console.WriteLine(counter);
+		break;
+
 	case 'm':	
 	case 'M':
 		Console.WriteLine();
@@ -17,7 +28,6 @@ switch (key.KeyChar)
 	case 's':
 	case 'S':
 		Console.WriteLine();
-		List<int> allPages = new List<int>() {6,7,8,9,10,11,12,22,23,24,25,43,44,45,46,47,48,66,67,68,84 };
 		SplitChecker spl = new SplitChecker();
 		spl.CheckList(allPages, 100);
 		break;
