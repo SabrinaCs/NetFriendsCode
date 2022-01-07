@@ -71,9 +71,9 @@ namespace ListeNumeri
                 {
                     Console.Write(sop);
                     Console.Write(i);
-                    sop = "| ";
+                    sop = ", ";
                 }
-                sep = ", ";
+                sep = "; ";
             }
             Console.WriteLine();
 
@@ -89,9 +89,9 @@ namespace ListeNumeri
                 {
                     Console.Write(sop);
                     Console.Write(i);
-                    sop = "| ";
+                    sop = ", ";
                 }
-                sep = ", ";
+                sep = "; ";
             }
             Console.WriteLine();
 
