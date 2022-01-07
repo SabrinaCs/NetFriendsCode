@@ -8,15 +8,15 @@ namespace ListeNumeri
 {
     internal class GroupNumbers
     {
-        List<int> sourceNumbers;
+        IEnumerable<int> sourceNumbers;
 
         Dictionary<string, List<int>> Founded = new Dictionary<string, List<int>>();
         Dictionary<string, List<int>> Unfounded = new Dictionary<string, List<int>>();
         List<int> currentGroup;
 
-        public GroupNumbers()
+        public GroupNumbers(IEnumerable<int> listaNumeri)
         {
-            sourceNumbers = new List<int> { 1, 2, 3, 4, 12, 13, 14, 15, 21, 22, 23, 24, 25 };
+            sourceNumbers = listaNumeri;
             
             bool foundActive = false;
             bool notFoundActive = false;
