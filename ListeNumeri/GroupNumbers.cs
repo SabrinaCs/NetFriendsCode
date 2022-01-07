@@ -16,6 +16,8 @@ namespace ListeNumeri
 
         public GroupNumbers(List<int> numbers)
         {
+            //Prometto di modificare il costruttore
+            
             sourceNumbers = numbers; //new List<int> { 1, 2, 3, 4, 12, 13, 14, 15, 21, 22, 23, 24, 25 };
             
             bool foundActive = false;
