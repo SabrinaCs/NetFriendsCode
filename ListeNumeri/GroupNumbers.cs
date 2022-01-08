@@ -8,17 +8,15 @@ namespace ListeNumeri
 {
     internal class GroupNumbers
     {
-        List<int> sourceNumbers;
+        IEnumerable<int> sourceNumbers;
 
         Dictionary<string, List<int>> Founded = new Dictionary<string, List<int>>();
         Dictionary<string, List<int>> Unfounded = new Dictionary<string, List<int>>();
         List<int> currentGroup;
 
-        public GroupNumbers(List<int> numbers)
+        public GroupNumbers(IEnumerable<int> listaNumeri)
         {
-            //Prometto di modificare il costruttore
-            
-            sourceNumbers = numbers; //new List<int> { 1, 2, 3, 4, 12, 13, 14, 15, 21, 22, 23, 24, 25 };
+            sourceNumbers = new List<int> { 1, 2, 3, 4, 12, 13, 14, 15, 21, 22, 23, 24, 25 };
             
             bool foundActive = false;
             bool notFoundActive = false;
@@ -73,9 +71,9 @@ namespace ListeNumeri
                 {
                     Console.Write(sop);
                     Console.Write(i);
-                    sop = "| ";
+                    sop = ", ";
                 }
-                sep = ", ";
+                sep = "; ";
             }
             Console.WriteLine();
 
@@ -91,9 +89,9 @@ namespace ListeNumeri
                 {
                     Console.Write(sop);
                     Console.Write(i);
-                    sop = "| ";
+                    sop = ", ";
                 }
-                sep = ", ";
+                sep = "; ";
             }
             Console.WriteLine();
 
