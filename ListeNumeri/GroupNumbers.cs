@@ -16,7 +16,7 @@ namespace ListeNumeri
 
         public GroupNumbers(IEnumerable<int> listaNumeri)
         {
-            sourceNumbers = new List<int> { 1, 2, 3, 4, 12, 13, 14, 15, 21, 22, 23, 24, 25 };
+            sourceNumbers = listaNumeri;
             
             bool foundActive = false;
             bool notFoundActive = false;
