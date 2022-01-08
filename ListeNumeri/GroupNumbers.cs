@@ -21,7 +21,7 @@ namespace ListeNumeri
             bool foundActive = false;
             bool notFoundActive = false;
 
-            for (int i = 0; i < 30; i++)
+            for (int i = 0; i < listaNumeri.Count(); i++)
             {
                 if (sourceNumbers.Contains(i))
                 {
