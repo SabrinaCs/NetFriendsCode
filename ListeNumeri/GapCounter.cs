@@ -5,6 +5,7 @@ public class GapCounter
     public List<Gap> InList { get; private set; }
     public List<Gap> OutList { get; private set; }
 
+//Costruttore usato dalla DI
     public GapCounter(ReportParams reportParams)
     {
         InList = new();

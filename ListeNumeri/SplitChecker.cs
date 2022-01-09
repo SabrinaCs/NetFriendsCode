@@ -11,6 +11,7 @@ namespace ListeNumeri;
 ///</summary>
 public class SplitChecker
 {
+    //Costruttore usato dalla DI
     public SplitChecker(ReportParams reportParams)
     {
         CheckList(reportParams.PagesList, reportParams.Pages);

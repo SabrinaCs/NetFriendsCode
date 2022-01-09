@@ -8,6 +8,7 @@ internal class GroupNumbers
     Dictionary<string, List<int>> Unfounded = new Dictionary<string, List<int>>();
     List<int> currentGroup;
 
+//Costruttore usato dalla DI
     public GroupNumbers(ReportParams reportParams)
     {
         sourceNumbers = reportParams.PagesList;
