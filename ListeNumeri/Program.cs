@@ -22,14 +22,14 @@ var host = Host.CreateDefaultBuilder()
 					
 					//Singleton: Viene istanziato una unica volta e distrutto alla chiusura dell'applicazione
 					//Scoped: Viene istanziato ogni volta che serve ma non ci puo' essere piu' di una unica istanza.
-					//		  Quando esiste, viene condiviso da tutti i processi che lo richiedono
+					//        Quando esiste, viene condiviso da tutti i processi che lo richiedono
 					//        Viene distrutto quando non viene piu' usato da nessun processo, e ricreato se nuovamente richiesto ed era stato distrutto
 					//Transient: Viene creata una istanza ogni volta che ne viene fatta richiesta
 
 					// Se i servizi hanno dei costruttori con parametri, anche i parametri devono esistere come servizi
-					// In questo caso ReportParameters e' una classe che funge da parametro per gli altri servizi.
-					// ReportParameters non viene istanziato finche' un servizio non ne fa richiesta
-					// ReportParameters e' stato aggiunto come Scoped cosi' tutti gli altri servizi lo usano in condivisione
+					// In questo caso ReportParams e' una classe che funge da parametro per gli altri servizi.
+					// ReportParams non viene istanziato finche' un servizio non ne fa richiesta
+					// ReportParams e' stato aggiunto come Scoped cosi' tutti gli altri servizi lo usano in condivisione
 
 					// Quando si usa la DI non si deve mai distruggere un servizio via codice
 
