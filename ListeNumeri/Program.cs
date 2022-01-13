@@ -10,6 +10,12 @@ Console.WriteLine("Press A for Check ALL Version");
 
 
 var host = Host.CreateDefaultBuilder()
+				.ConfigureHostConfiguration((config)=>
+				{
+					// Lascio a voi capire la differenza tra CreateDefaultBuilder e ConfigureAppConfiguration
+					// Nel link di seguito è spiegato molto bene... :)
+					// https://github.com/dotnet/AspNetCore.Docs/issues/9278
+				})
 				.ConfigureAppConfiguration((context, builder) =>
 				{
 					//No configurations needed
@@ -41,6 +47,7 @@ var host = Host.CreateDefaultBuilder()
 				.ConfigureLogging(logging => 
 				{
 					// Qui si potrebbe aggiungere un Logger per registrare gli otuput che ora vengono direttamente inviati alla Console
+					// In GroupNumbers viene usato il Logger di default
 				}).Build();
 
 var key = Console.ReadLine();

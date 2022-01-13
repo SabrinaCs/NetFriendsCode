@@ -1,4 +1,6 @@
-﻿namespace ListeNumeri;
+﻿using Microsoft.Extensions.Logging;
+
+namespace ListeNumeri;
 
 internal class GroupNumbers
 {
@@ -8,9 +10,11 @@ internal class GroupNumbers
     Dictionary<string, List<int>> Unfounded = new Dictionary<string, List<int>>();
     List<int> currentGroup;
 
-//Costruttore usato dalla DI
-    public GroupNumbers(ReportParams reportParams)
+// Costruttore usato dalla DI
+// reportParamenters e logger vengono passato direttamente dalla DI tramite IoC
+    public GroupNumbers(ReportParams reportParams, ILogger<GroupNumbers> logger)
     {
+        logger.LogInformation("Start grouping numbers");
         sourceNumbers = reportParams.PagesList;
         solve();
     }
