@@ -1,52 +1,101 @@
-﻿using ListeNumeri;
+﻿using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.DependencyInjection;
+using ListeNumeri;
 
 Console.WriteLine("Press M for Check group of numbers Micky Version");
 Console.WriteLine("Press S for Check group of numbers Sabrina Version");
 Console.WriteLine("Press X for Check group of numbers Micle Version");
 Console.WriteLine("Press A for Check ALL Version");
 
+
+
+var host = Host.CreateDefaultBuilder()
+				.ConfigureHostConfiguration((config)=>
+				{
+					// Lascio a voi capire la differenza tra CreateDefaultBuilder e ConfigureAppConfiguration
+					// Nel link di seguito è spiegato molto bene... :)
+					// https://github.com/dotnet/AspNetCore.Docs/issues/9278
+				})
+				.ConfigureAppConfiguration((context, builder) =>
+				{
+					//No configurations needed
+					//Qui possono essere aggiunti parametri di configurazione del Host
+					//Ad esempio possiamo caricare dei file di settings da un file json, xml e altro
+				})
+				.ConfigureServices((context, services)=>
+				{
+					//Qui possiamo caricare dei servizi (classi che riusiamo spesso nel software)
+					
+					//Singleton: Viene istanziato una unica volta e distrutto alla chiusura dell'applicazione
+					//Scoped: Viene istanziato ogni volta che serve ma non ci puo' essere piu' di una unica istanza.
+					//        Quando esiste, viene condiviso da tutti i processi che lo richiedono
+					//        Viene distrutto quando non viene piu' usato da nessun processo, e ricreato se nuovamente richiesto ed era stato distrutto
+					//Transient: Viene creata una istanza ogni volta che ne viene fatta richiesta
+
+					// Se i servizi hanno dei costruttori con parametri, anche i parametri devono esistere come servizi
+					// In questo caso ReportParams e' una classe che funge da parametro per gli altri servizi.
+					// ReportParams non viene istanziato finche' un servizio non ne fa richiesta
+					// ReportParams e' stato aggiunto come Scoped cosi' tutti gli altri servizi lo usano in condivisione
+
+					// Quando si usa la DI non si deve mai distruggere un servizio via codice
+
+					services.AddScoped<ReportParams>();
+					services.AddTransient<GroupNumbers>();
+					services.AddTransient<GapCounter>();
+					services.AddTransient<SplitChecker>();					
+				})
+				.ConfigureLogging(logging => 
+				{
+					// Qui si potrebbe aggiungere un Logger per registrare gli otuput che ora vengono direttamente inviati alla Console
+					// In GroupNumbers viene usato il Logger di default
+				}).Build();
+
 var key = Console.ReadLine();
 Console.WriteLine($"Hello, you pressed {key}");
 
-List<int> allPages = new List<int>() { 6, 7, 8, 9, 10, 11, 12, 22, 23, 24, 25, 43, 44, 45, 46, 47, 48, 66, 67, 68, 84 };
 
 Console.WriteLine("\n");
-allPages.ForEach(i => Console.Write($"{i}, "));
+
+ReportParams reportParams = new ReportParams(); //Usato per il codice che non usa la DependencyInjection IoC
+reportParams.PagesList.ForEach(i => Console.Write($"{i}, "));
 
 switch (key)
 {
 	case "a":
-	case "A":
+	case "A":  //Solo qui viene sfruttata la DependencyInjection
+
 		Console.WriteLine($"\n\n#### Soluzione Micle: ####\n");
-		GapCounter counter1 = new GapCounter(allPages);
+		//GapCounter counter1 = new GapCounter(allPages);
+		var counter1 = host.Services.GetRequiredService<GapCounter>();
 		Console.WriteLine(counter1);
 
 		Console.WriteLine($"\n\n#### Soluzione Miky: ####\n");
-		var miky = new GroupNumbers(allPages);
+		//var miky = new GroupNumbers(allPages);
+		var miky = host.Services.GetRequiredService<GroupNumbers>();
 
 		Console.WriteLine($"\n\n#### Soluzione Sabrina: ####\n");
-		SplitChecker spl1 = new SplitChecker();
-		spl1.CheckList(allPages, 100);
+		//SplitChecker spl1 = new SplitChecker();
+		var spl1 = host.Services.GetRequiredService<SplitChecker>();
+		//spl1.CheckList(allPages, 100);
 		break;
 
 	case "x":
 	case "X":
-		GapCounter counter = new GapCounter(allPages);
+		GapCounter counter = new GapCounter(reportParams.PagesList);
 		Console.WriteLine(counter);
 		break;
 
 	case "m":	
 	case "M":
 		Console.WriteLine();
-		var gn = new GroupNumbers(allPages);
-		//var gn = new GroupNumbers(new List<int> { 1, 2, 3, 4, 12, 13, 14, 15, 21, 22, 23, 24, 25 });
+		var gn = new GroupNumbers(reportParams.PagesList);
 		break;
 
 	case "s":
 	case "S":
 		Console.WriteLine();
-		SplitChecker spl = new SplitChecker();
-		spl.CheckList(allPages, 100);
+		SplitChecker spl = new SplitChecker(reportParams);
+		//spl.CheckList(reportParams.PagesList, reportParams.Pages);
 		break;
 
 	default:
@@ -55,6 +104,8 @@ switch (key)
 		Console.ReadLine();
 		break;
 }
+
+
 
 
 
